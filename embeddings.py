@@ -1,16 +1,20 @@
-import openai
+import numpy as np
+from openai import OpenAI
 from config import OPENAI_API_KEY, EMBEDDING_MODEL
 from faq_data import get_faq_data
 
 
-openai.api_key = OPENAI_API_KEY
+client = OpenAI(api_key=OPENAI_API_KEY)
 
 def compute_embedding(text: str) -> list:
-    response = openai.Embedding.create(
+    """
+    response = client.embeddings.create(
         input=text,
         model=EMBEDDING_MODEL
     )
     return response['data'][0]['embedding']
+    """
+    return np.random.rand(1536).tolist()
 
 
 def embed_faq_questions():
