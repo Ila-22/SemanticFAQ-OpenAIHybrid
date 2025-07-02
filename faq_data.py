@@ -40,3 +40,7 @@ faq_database = [
         "answer": "In your communication preferences, find 'Email Digest Settings', where you can adjust the frequency to daily, weekly, or monthly, or turn them off completely."
     }
 ]
+
+
+def get_faq_data():
+    return faq_database
