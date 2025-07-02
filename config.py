@@ -2,5 +2,8 @@ from dotenv import load_dotenv
 import os
 
 load_dotenv()
-api_key = os.getenv("OPENAI_API_KEY")
-print(f"API Key loaded: {api_key[:5]}...")  # confirm it's working
+
+OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
+EMBEDDING_MODEL = "text-embedding-3-small"  # or -3-large
+
+print(f"API Key loaded: {OPENAI_API_KEY [:5]}...")  # for debugging purposes :)
