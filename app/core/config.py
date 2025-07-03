@@ -1,7 +1,7 @@
 from pydantic_settings import BaseSettings
-from dotenv import load_dotenv
+import logging
+import reprlib
 
-load_dotenv()
 
 class Settings(BaseSettings):
     openai_api_key: str
@@ -10,6 +10,13 @@ class Settings(BaseSettings):
     similarity_threshold: float = 0.75
 
     class Config:
-        env_file = ".env"
+        env_file = ".env"  # Pydantic will load this automatically
 
 settings = Settings()
+
+print(f">>>>>>>>> Raw API key: {repr(settings.openai_api_key)}")
+#settings.openai_api_key = settings.openai_api_key.strip()
+
+# debugging API key
+logger = logging.getLogger(__name__)
+logger.debug(f"OPENAI_API_KEY (partial): {reprlib.repr(settings.openai_api_key)}")
