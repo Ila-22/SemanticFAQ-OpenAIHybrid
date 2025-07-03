@@ -1,3 +1,4 @@
+from app.services.ai_router import classify_question
 from app.core.config import settings
 from app.services.similarity import find_most_similar_question
 from app.services.embeddings import get_embedded_faqs, compute_embedding
@@ -11,9 +12,22 @@ embedded_faqs = get_embedded_faqs()
 
 def route_question(user_question: str) -> dict:
     """
-    Determines whether a user question matches a local FAQ.
-    Falls back to OpenAI model if similarity is too low.
+    Routes question based on classification:
+    - If IT: continue with similarity + OpenAI fallback
+    - If COMPLIANCE: return default message
     """
+    classification = classify_question(user_question)
+    logger.debug(f"Classification result: {classification}")
+
+    if classification == "COMPLIANCE":
+        return {
+            "answer": "This is not really what I was trained for, therefore I cannot answer. Try again.",
+            "source": "ComplianceAgent",
+            "matched_question": None,
+            "score": 0.0
+        }
+    
+    # Otherwise continue with normal FAQ flow 
     try:
         match, score = find_most_similar_question(user_question, embedded_faqs)
 
