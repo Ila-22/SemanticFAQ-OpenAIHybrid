@@ -1,6 +1,7 @@
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, HTTPException, Depends
 from app.models.schemas import QuestionRequest, QuestionResponse
 from app.services.router import route_question
+from app.core.auth import get_token
 from app.core.logger import get_logger
 
 router = APIRouter()
@@ -8,15 +9,17 @@ logger = get_logger(__name__)
 
 @router.post("/ask-question", response_model=QuestionResponse)
 
-def ask_question(request: QuestionRequest):
+def ask_question(payload: QuestionRequest, token: str = Depends(get_token)):
     """
-    API endpoint to process a user question.
-    Routes to either local FAQ or OpenAI fallback.
-    """
-    logger.info(f"Received question: {request.user_question}")
+    Handles a user question and returns an appropriate answer.
 
+    - Matches the question to a semantically similar FAQ entry.
+    - Falls back to OpenAI if similarity is low.
+    - Requires valid authentication via Bearer token.
+    """
     try:
-        result = route_question(request.user_question)
+        logger.info(f"Received question: {payload.user_question}")
+        result = route_question(payload.user_question)
         logger.info(f"Matched via: {result['source']} | Score: {result['score']:.4f}")
         return QuestionResponse(**result)
     except Exception as e:
