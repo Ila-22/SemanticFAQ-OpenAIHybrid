@@ -12,16 +12,16 @@ def compute_embedding(text: str) -> list:
     """
 
     # Use real OpenAI embedding call in production:
-    """
     response = client.embeddings.create(
         input=text,
         model=settings.embedding_model
     )
-    return response['data'][0]['embedding']
-    """
 
     # Mocked embedding for dev/testing:
-    return np.random.rand(1536).tolist()
+    #return np.random.rand(1536).tolist()
+
+    return response.data[0].embedding
+
 
 # Global cache for embedded FAQs
 _embedded_cache = None
