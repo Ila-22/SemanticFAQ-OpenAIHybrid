@@ -21,10 +21,9 @@ def route_question(user_question: str) -> dict:
 
     if classification == "COMPLIANCE":
         return {
-            "answer": "This is not really what I was trained for, therefore I cannot answer. Try again.",
             "source": "ComplianceAgent",
-            "matched_question": None,
-            "score": 0.0
+            "matched_question": "N/A",
+            "answer": "This is not really what I was trained for, therefore I cannot answer. Try again."
         }
     
     # Otherwise continue with normal FAQ flow 
@@ -35,9 +34,9 @@ def route_question(user_question: str) -> dict:
             logger.debug("Using local FAQ answer.")
             return {
                 "source": "local",
-                "matched_question": match["question"],
+                "matched_question": match.get("original_question", match["question"]),
                 "answer": match["answer"],
-                "score": score
+                #"score": score
             }
         else:
             logger.debug("Using OpenAI fallback.")
@@ -46,7 +45,7 @@ def route_question(user_question: str) -> dict:
                 "source": "openai",
                 "matched_question": "N/A",
                 "answer": openai_answer,
-                "score": score
+                #"score": score
             }
 
     except Exception as e:

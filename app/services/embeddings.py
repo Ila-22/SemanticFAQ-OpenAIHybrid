@@ -10,6 +10,8 @@ def compute_embedding(text: str) -> list:
     """
     Computes an embedding for a given text.
     """
+
+    # Use real OpenAI embedding call in production:
     """
     response = client.embeddings.create(
         input=text,
@@ -17,9 +19,11 @@ def compute_embedding(text: str) -> list:
     )
     return response['data'][0]['embedding']
     """
+
+    # Mocked embedding for dev/testing:
     return np.random.rand(1536).tolist()
 
-# Cache FAQ embeddings on first use
+# Global cache for embedded FAQs
 _embedded_cache = None
 
 def get_embedded_faqs():
@@ -34,7 +38,9 @@ def get_embedded_faqs():
         for item in faq_items:
             embedding = compute_embedding(item["question"])
             _embedded_cache.append({
-                "question": item["question"],
+                "id": item.get("id"),
+                "question": item["question"], # Cleaned/preprocessed version
+                "original_question": item["original_question"],  # Raw original from file
                 "answer": item["answer"],
                 "embedding": embedding
             })
