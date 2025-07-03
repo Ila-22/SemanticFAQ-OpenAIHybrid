@@ -18,6 +18,7 @@ def ask_question(request: QuestionRequest):
 
     try:
         result = route_question(request.user_question)
+        logger.info(f"Matched via: {result['source']} | Similarity Score: {result['score']:.4f}")
         return result
     except Exception as e:
         logger.error("Error while processing question", exc_info=True)
