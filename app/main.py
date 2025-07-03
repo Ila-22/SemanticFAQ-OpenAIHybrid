@@ -5,7 +5,7 @@ from contextlib import asynccontextmanager
 
 from app.api.routes import router as faq_router
 from app.core.logger import get_logger
-from app.core.exception_handlers import global_exception_handler
+from app.core.exception_handlers import exception_handlers
 
 
 logger = get_logger(__name__)
@@ -26,7 +26,9 @@ app = FastAPI(
 )
 
 # Register global exception handler
-app.add_exception_handler(Exception, global_exception_handler)
+for exc_class, handler in exception_handlers.items():
+    app.add_exception_handler(exc_class, handler)
+    
 
 # CORS middleware
 app.add_middleware(
