@@ -1,5 +1,5 @@
 import numpy as np
-from embeddings import compute_embedding
+from app.services.embeddings import compute_embedding
 from typing import List, Dict, Tuple
 
 def cosine_similarity(vec1: List[float], vec2: List[float]) -> float:

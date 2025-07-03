@@ -1,9 +1,9 @@
 import numpy as np
 from openai import OpenAI
-from config import OPENAI_API_KEY, EMBEDDING_MODEL
-from faq_data import get_faq_data
+from app.core.config import OPENAI_API_KEY, EMBEDDING_MODEL
+from app.services.faq_data import get_faq_data
 
-
+_embedded_cache = None
 client = OpenAI(api_key=OPENAI_API_KEY)
 
 def compute_embedding(text: str) -> list:
@@ -31,3 +31,9 @@ def embed_faq_questions():
         })
 
     return embedded_faqs
+
+def get_embedded_faqs():
+    global _embedded_cache
+    if _embedded_cache is None:
+        _embedded_cache = embed_faq_questions()
+    return _embedded_cache

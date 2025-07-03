@@ -1,4 +1,4 @@
-from embeddings import embed_faq_questions
+from app.services.embeddings import embed_faq_questions
 
 def main():
     faq_embeddings = embed_faq_questions()

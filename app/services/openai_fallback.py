@@ -1,6 +1,6 @@
 from langchain.chat_models import ChatOpenAI
 from langchain.schema import HumanMessage
-from config import OPENAI_API_KEY
+from app.core.config import OPENAI_API_KEY
 
 llm = ChatOpenAI(
     model="gpt-4o",

@@ -1,5 +1,5 @@
-from similarity import find_most_similar_question
-from embeddings import embed_faq_questions
+from app.services.similarity import find_most_similar_question
+from app.services.embeddings import embed_faq_questions
 
 faqs = embed_faq_questions()
 user_question = "How do I change my name?"
