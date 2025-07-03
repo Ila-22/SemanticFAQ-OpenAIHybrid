@@ -10,6 +10,10 @@ logger = get_logger(__name__)
 embedded_faqs = get_embedded_faqs()
 
 def route_question(user_question: str) -> dict:
+    """
+    Determines whether a user question matches a local FAQ.
+    Falls back to OpenAI model if similarity is too low.
+    """
     try:
         match, score = find_most_similar_question(user_question, embedded_faqs)
 

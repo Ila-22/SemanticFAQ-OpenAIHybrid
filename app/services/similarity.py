@@ -3,6 +3,9 @@ from app.services.embeddings import compute_embedding
 from typing import List, Dict, Tuple
 
 def cosine_similarity(vec1: List[float], vec2: List[float]) -> float:
+    """
+    Computes cosine similarity between two vectors.
+    """
     vec1 = np.array(vec1)
     vec2 = np.array(vec2)
     return np.dot(vec1, vec2) / (np.linalg.norm(vec1) * np.linalg.norm(vec2))
@@ -12,6 +15,9 @@ def find_most_similar_question(
     user_question: str, 
     embedded_faqs: List[Dict]
 ) -> Tuple[Dict, float]:
+    """
+    Finds the most similar FAQ question to the user input.
+    """
     user_embedding = compute_embedding(user_question)
     
     best_match = None

@@ -1,10 +1,10 @@
 from langchain.chat_models import ChatOpenAI
 from langchain.schema import HumanMessage
-from app.core.config import OPENAI_API_KEY
+from app.core.config import settings
 
 llm = ChatOpenAI(
     model="gpt-4o",
-    openai_api_key=OPENAI_API_KEY
+    openai_api_key=settings.openai_api_key
 )
 
 def get_openai_answer(user_question: str) -> str:

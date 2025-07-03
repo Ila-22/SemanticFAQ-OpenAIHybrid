@@ -7,7 +7,12 @@ router = APIRouter()
 logger = get_logger(__name__)
 
 @router.post("/ask-question", response_model=QuestionResponse)
+
 def ask_question(request: QuestionRequest):
+    """
+    API endpoint to process a user question.
+    Routes to either local FAQ or OpenAI fallback.
+    """
     logger.info(f"Received question: {request.user_question}")
 
     try:
