@@ -20,7 +20,11 @@ def ask_question(payload: QuestionRequest, token: str = Depends(get_token)):
     try:
         logger.info(f"Received question: {payload.user_question}")
         result = route_question(payload.user_question)
-        logger.info(f"Matched via: {result['source']} | Score: {result['score']:.4f}")
+        score = result.get("score")
+        if score is not None:
+            logger.info(f"Matched via: {result['source']} | Score: {score:.4f}")
+        else:
+            logger.info(f"Matched via: {result['source']}")
         return QuestionResponse(**result)
     except Exception as e:
         logger.error(f"Failed to process question: {e}", exc_info=True)

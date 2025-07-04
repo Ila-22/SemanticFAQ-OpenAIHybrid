@@ -15,7 +15,7 @@ class Settings(BaseSettings):
 settings = Settings()
 
 print(f">>>>>>>>> Raw API key: {repr(settings.openai_api_key)}")
-#settings.openai_api_key = settings.openai_api_key.strip()
+settings.openai_api_key = settings.openai_api_key.strip()
 
 # debugging API key
 logger = logging.getLogger(__name__)

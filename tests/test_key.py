@@ -8,4 +8,6 @@ try:
     response = openai.Client().models.list()
     print("✅ Success:", response)
 except Exception as e:
-    print("❌ Error:", e)
+    print("❌ Error:")
+    import traceback
+    traceback.print_exc()

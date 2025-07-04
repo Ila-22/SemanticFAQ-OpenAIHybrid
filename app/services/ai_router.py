@@ -3,7 +3,8 @@ from langchain_core.prompts import PromptTemplate
 from app.core.config import settings
 
 # LLM to use
-llm = ChatOpenAI(temperature=0.0, openai_api_key=settings.openai_api_key)
+llm = ChatOpenAI(temperature=0.0, model=settings.chat_model, openai_api_key=settings.openai_api_key)
+
 
 # Prompt to classify the question
 classification_prompt = PromptTemplate(

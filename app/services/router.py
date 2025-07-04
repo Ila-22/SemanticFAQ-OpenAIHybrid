@@ -23,7 +23,8 @@ def route_question(user_question: str) -> dict:
         return {
             "source": "ComplianceAgent",
             "matched_question": "N/A",
-            "answer": "This is not really what I was trained for, therefore I cannot answer. Try again."
+            "answer": "This is not really what I was trained for, therefore I cannot answer. Try again.",
+            "score": 0.0 # Compliance questions don't have a similarity score
         }
     
     # Otherwise continue with normal FAQ flow 
@@ -36,7 +37,7 @@ def route_question(user_question: str) -> dict:
                 "source": "local",
                 "matched_question": match.get("original_question", match["question"]),
                 "answer": match["answer"],
-                #"score": score
+                "score": score
             }
         else:
             logger.debug("Using OpenAI fallback.")
@@ -45,7 +46,7 @@ def route_question(user_question: str) -> dict:
                 "source": "openai",
                 "matched_question": "N/A",
                 "answer": openai_answer,
-                #"score": score
+                "score": score
             }
 
     except Exception as e:
