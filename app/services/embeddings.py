@@ -17,9 +17,6 @@ def compute_embedding(text: str) -> list:
         model=settings.embedding_model
     )
 
-    # Mocked embedding for dev/testing:
-    #return np.random.rand(1536).tolist()
-
     return response.data[0].embedding
 
 

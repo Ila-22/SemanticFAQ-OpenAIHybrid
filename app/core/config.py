@@ -14,7 +14,7 @@ class Settings(BaseSettings):
 
 settings = Settings()
 
-print(f">>>>>>>>> Raw API key: {repr(settings.openai_api_key)}")
+# Ensure the API key is stripped of any leading/trailing whitespace
 settings.openai_api_key = settings.openai_api_key.strip()
 
 # debugging API key

@@ -25,7 +25,8 @@ router_chain = classification_prompt | llm
 
 def classify_question(question: str) -> str:
     """
-    Mocked version: classifies based on keywords without calling OpenAI.
+    Classifies the question using an LLM (via LangChain prompt).
+    Returns 'IT' or 'COMPLIANCE'. Falls back to 'COMPLIANCE' on error.
     """
     try:
         response = router_chain.invoke({"question": question})

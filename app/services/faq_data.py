@@ -24,7 +24,7 @@ def get_faq_data() -> list[dict]:
         processed.append({
             "id": item.get("id"),
             "question": preprocess_question(item["question"]),
-            "original_question": item["question"],  # Optional: keep original
+            "original_question": item["question"],  # Keep original for reference
             "answer": item["answer"]
         })
     return processed

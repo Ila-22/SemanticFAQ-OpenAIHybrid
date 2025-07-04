@@ -5,6 +5,7 @@ from app.services.embeddings import get_embedded_faqs, compute_embedding
 from app.services.openai_fallback import get_openai_answer
 from app.core.logger import get_logger
 
+
 logger = get_logger(__name__)
 
 # Load embedded FAQs once at startup

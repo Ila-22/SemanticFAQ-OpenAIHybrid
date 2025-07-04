@@ -11,7 +11,4 @@ def get_openai_answer(question: str) -> str:
     return llm.invoke(question).content
 
 
-#def get_openai_answer(user_question: str) -> str:
-    # Fake response for local testing
-    #return "I'm a mock GPT. This is only a fake answer for your question."
 
