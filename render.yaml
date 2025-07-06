@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: semantic-faq-api
+    env: python
+    region: hamburg
+    buildCommand: "pip install -r requirements.txt"
+    startCommand: "uvicorn app.main:app --host 0.0.0.0 --port 10000"
+    plan: free
+    envVars:
+      - key: AUTH_TOKEN
+        value: ila_3f920e
+        
