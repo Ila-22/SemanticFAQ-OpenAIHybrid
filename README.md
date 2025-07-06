@@ -6,7 +6,7 @@ A FastAPI-powered backend that semantically matches user questions to a curated 
 
 ## 🚀 Features
 
-- 🔐 **Token-based authentication** (OAuth2 Bearer Token)
+- 🔐 **Token-based authentication using Bearer token format** 
 - 🧠 **Semantic similarity matching** via OpenAI embeddings
 - 🤖 **LLM-powered classification** (`IT` vs `COMPLIANCE`)
 - 💬 **GPT-4o fallback** for unmatched questions
@@ -43,4 +43,10 @@ uvicorn app.main:app --reload
 ```
 Visit the auto-generated Swagger docs at: http://localhost:8000/docs
 
+The authentication logic is implemented in app/core/auth.py using FastAPI’s APIKeyHeader:
 
+```bash
+VALID_TOKENS = {"ila_3f920e"}
+```
+
+To update valid tokens, modify the VALID_TOKENS set.
